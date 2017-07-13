@@ -26,7 +26,11 @@ public class UPGFunction: NSObject {
             pwBuilder.append(getColorArray(x: Int(numPassword.frame.origin.x), y: Int(numPassword.frame.origin.y), background: container.backgroundBitmap))
         }
         
-        return pwBuilder
+        var md5s2 : Digest = Digest(algorithm:.md5)
+        md5s2.update(string: pwBuilder)
+        let digests2 = md5s2.final()
+        
+        return hexString(fromArray: digests2)
     }
     
     public func testEncoding(argStr: String) -> String {
@@ -52,10 +56,6 @@ public class UPGFunction: NSObject {
         colorBuilder.append(pixel.components.blue.description)
         colorBuilder.append(pixel.components.alpha.description)
         
-        var md5s2 : Digest = Digest(algorithm:.md5)
-        md5s2.update(string: colorBuilder)
-        let digests2 = md5s2.final()
-        
-        return hexString(fromArray: digests2)
+        return colorBuilder;
     }
 }
