@@ -10,7 +10,7 @@ import Foundation
 import IDZSwiftCommonCrypto
 
 public class UPGFunction: NSObject {
-    public func doEncoding(container: UPGContainer) {
+    public func doEncoding(container: UPGContainer) -> String{
         var pwBuilder:String = "";
         
         //step1
@@ -25,6 +25,8 @@ public class UPGFunction: NSObject {
         for numPassword in container.numPasswordArray {
             pwBuilder.append(getColorArray(x: Int(numPassword.frame.origin.x), y: Int(numPassword.frame.origin.y), background: container.backgroundBitmap))
         }
+        
+        return pwBuilder
     }
     
     public func testEncoding(argStr: String) -> String {
